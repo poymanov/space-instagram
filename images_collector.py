@@ -58,7 +58,6 @@ def collect_hubble():
         image_url = image['file_url']
         filename = 'hubble{}.{}'.format(image_item['id'], get_file_extension(image_url))
         save_image(image_url, filename)
-        break
 
 
 def save_image(url, filename):
