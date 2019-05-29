@@ -27,6 +27,6 @@ def upload():
     bot = login()
 
     for filename in listdir(IMAGES_PATH):
-        if isfile(joinpath(IMAGES_PATH, filename)):
-            filepath = "{}/{}".format(IMAGES_PATH, filename)
+        filepath = joinpath(IMAGES_PATH, filename)
+        if isfile(filepath):
             bot.upload_photo(filepath, caption=get_caption(filename))

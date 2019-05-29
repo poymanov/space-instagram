@@ -1,5 +1,6 @@
 import requests
 import os
+from os.path import join as joinpath
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -29,7 +30,7 @@ def collect_spacex():
     images = json_data['links']['flickr_images']
 
     for i, item in enumerate(images):
-        filename = 'spacex{}.{}'.format(i + 1, get_file_extension(item))
+        filename = 'spacex{}{}'.format(i + 1, get_file_extension(item))
         save_image(item, filename)
 
 
@@ -47,7 +48,7 @@ def collect_hubble():
 
         image_data = image_response.json()
 
-        if 'image_files' not in image_data or len(image_data['image_files']) == 0:
+        if 'image_files' not in image_data or not len(image_data['image_files']):
             continue
 
         image = image_data['image_files'][-1]
@@ -56,21 +57,18 @@ def collect_hubble():
             continue
 
         image_url = image['file_url']
-        filename = 'hubble{}.{}'.format(image_item['id'], get_file_extension(image_url))
+        filename = 'hubble{}{}'.format(image_item['id'], get_file_extension(image_url))
         save_image(image_url, filename)
 
 
 def save_image(url, filename):
-    save_path = '{}/{}'.format(IMAGES_PATH, filename)
+    save_path = joinpath(IMAGES_PATH, filename)
     response = requests.get(url)
-
-    if not os.path.exists(IMAGES_PATH):
-        os.makedirs(IMAGES_PATH)
+    os.makedirs(IMAGES_PATH, exist_ok=True)
 
     with open(save_path, 'wb') as file:
         file.write(response.content)
 
 
 def get_file_extension(path):
-    data = path.split('.')
-    return data[-1]
+    return os.path.splitext(path)[1]
