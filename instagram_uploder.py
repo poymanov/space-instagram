@@ -1,11 +1,8 @@
 from instabot import Bot
 import os
-from dotenv import load_dotenv
 from os import listdir
 from os.path import isfile
 from os.path import join as joinpath
-
-load_dotenv()
 
 USERNAME = os.environ['INSTAGRAM_USERNAME']
 PASSWORD = os.environ['INSTAGRAM_PASSWORD']

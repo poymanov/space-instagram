@@ -1,9 +1,6 @@
 import requests
 import os
 from os.path import join as joinpath
-from dotenv import load_dotenv
-
-load_dotenv()
 
 IMAGES_PATH = os.environ['IMAGES_PATH']
 SPACEX_URL = 'https://api.spacexdata.com/v3/launches/latest'
@@ -13,7 +10,7 @@ HUBBLE_IMAGE_URL = 'http://hubblesite.org/api/v3/image/{}'
 
 def collect():
     collect_spacex()
-    collect_hubble()
+    # collect_hubble()
 
 
 def collect_spacex():
@@ -56,7 +53,7 @@ def collect_hubble():
         if 'file_url' not in image:
             continue
 
-        image_url = image['file_url']
+        image_url = 'http:{}'.format(image['file_url'])
         filename = 'hubble{}{}'.format(image_item['id'], get_file_extension(image_url))
         save_image(image_url, filename)
 

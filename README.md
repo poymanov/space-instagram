@@ -1,21 +1,16 @@
 # Публикация фотографий из космоса в Instagram
 
-Приложение получает фотографии космоса 
-через [SpaceX API](https://github.com/r-spacex/SpaceX-API), [Hubble API](http://hubblesite.org/api/documentation) 
+Приложение получает фотографии космоса
+через [SpaceX API](https://github.com/r-spacex/SpaceX-API), [Hubble API](http://hubblesite.org/api/documentation)
 и загружает их в пользовательский аккаунт [Instagram](https://www.instagram.com).
 
 ### Как установить
 
-Для работы приложения требуется **Python 3**.
+Установить **docker** и **docker-compose**
 
-Установить зависимости приложения:
+Выполнить:
 ```
-pip install -r requirements.txt
-```
-
-Подготовить файл для хранения параметров:
-```
-cp .env.example .env
+make
 ```
 
 Заполнить необходимые параметры в `.env`:
@@ -27,7 +22,7 @@ INSTAGRAM_PASSWORD - пароль пользователя в Instagram
 
 Запуск:
 ```
-python main.py
+make run
 ```
 
 ### Цель проекта
